@@ -33,6 +33,9 @@ yay -S --nocleanafter --norebuild --noredownload --removemake --noconfirm --need
                    texstudio \
                    docker \
                    ruby \
+                   brave-bin \
+                   mailspring-bin \
+                   vscodium-bin \
                    slack-desktop \
                    spotify \
                    clion \
