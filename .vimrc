@@ -2,8 +2,8 @@
 " vimrc from scratch
 "
 "------------------------------------------------------------------------------
+
 syntax on           "syntax highlighting
-filetype plugin on
 
 "------------------------------------------------------------------------------
 
@@ -29,13 +29,12 @@ set termguicolors   "colorful gui rendering
 set cursorline      "highlight the active line
 set shortmess+=c    "Don't pass messages to |ins-completion-menu|.
 set updatetime=50   "50ms for better user experience
-
+set autoread        "autoread changes of opened files
 
 set colorcolumn=80  "highlight column
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 "------------------------------------------------------------------------------
-
 "plugins section begin
 call plug#begin()
 
@@ -54,13 +53,9 @@ Plug 'preservim/nerdcommenter'  "commenter
 Plug 'honza/vim-snippets'       "snippets for coding
 Plug 'voldikss/vim-floaterm'    "floating terminal
 
-"check vimspector for debigging
-
 call plug#end()
 "plugin section end
-
 "------------------------------------------------------------------------------
-
 " gruvbox settings
 let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
@@ -71,27 +66,64 @@ let g:gruvbox_invert_selection='0'
 
 colorscheme gruvbox
 set background=dark
-
 "------------------------------------------------------------------------------
-
 if executable('rg')
     let g:rg_derive_root='true'
 endif
-
-
 "------------------------------------------------------------------------------
+"floating terminal configs
+
+let g:floaterm_keymap_toggle = '<F1>'
+let g:floaterm_keymap_next   = '<F2>'
+let g:floaterm_keymap_prev   = '<F3>'
+let g:floaterm_keymap_new    = '<F4>'
+let g:floaterm_keymap_kill   = '<F5>'
+" Floaterm
+let g:floaterm_gitcommit='floaterm'
+let g:floaterm_autoinsert=1
+let g:floaterm_width=0.8
+let g:floaterm_height=0.8
+let g:floaterm_wintitle=0
+let g:floaterm_autoclose=1
+"------------------------------------------------------------------------------
+"Commenting operations
+
+filetype plugin on
 
 let mapleader = " "     "set leader as space key
+"let g:NERDCommenterInvert = '<leader>/'
+let g:NERDCommentEmptyLines = 1     "allow commenting of empty lines
+"let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }   "custom for C
+nnoremap <leader>/ :NERDCommenterInvert<CR>
+"------------------------------------------------------------------------------
+"File operations
 
+
+nnoremap <leader>f :Files<CR>
 nnoremap <leader>P  :Rg <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>p :Files<CR>
 nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>= :vertical resize +5<CR>
-nnoremap <Leader>- :vertical resize -5<CR>gruvbox-community/gruvbox
 nnoremap <Leader>e :CocCommand explorer <CR>
 "nnoremap <C-/>  :NERDCommenterToggle
 
-nmap <leader>f :Vex<CR>  "openup file viewer
+"nmap <leader>f :Vex<CR>  "openup file viewer
 nmap <leader>q  :q<CR>  ":q command with space+q combination
+"------------------------------------------------------------------------------
+"splitting and navigating windows
+
+set splitright  "vertical split to right
+set splitbelow  "horizontal split to left
+noremap <leader>wv  :vnew<CR>   "vertical new split
+noremap <leader>ws  :new<CR>    "horizontal new split
+"window resizing
+noremap <leader><DOWN> : resize -5<CR>
+noremap <leader><Up> :resize +5<CR>
+noremap <leader><Left> :vertical resize -5<CR>
+noremap <leader><Right> :vertical resize +5<CR>
+"movement between windows
+noremap <Leader>l :wincmd l<CR>
+noremap <Leader>h :wincmd h<CR>
+noremap <Leader>j :wincmd j<CR>
+noremap <Leader>k :wincmd k<CR>
+"------------------------------------------------------------------------------
