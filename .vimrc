@@ -109,6 +109,7 @@ nnoremap <Leader>e :CocCommand explorer <CR>
 
 "nmap <leader>f :Vex<CR>  "openup file viewer
 nmap <leader>q  :q<CR>  ":q command with space+q combination
+nmap <leader>w  :w<CR>  ":w command with space+w combination
 "------------------------------------------------------------------------------
 "splitting and navigating windows
 
