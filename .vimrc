@@ -49,9 +49,9 @@ Plug 'vim-airline/vim-airline'  "airline
 Plug 'christoomey/vim-tmux-navigator' "tmux navigator
 Plug 'ryanoasis/vim-devicons'   "icons in vim
 Plug 'preservim/nerdcommenter'  "commenter
-"copied from nvim
 Plug 'honza/vim-snippets'       "snippets for coding
 Plug 'voldikss/vim-floaterm'    "floating terminal
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'} "plugin to have ranger inside vim
 
 call plug#end()
 "plugin section end
@@ -91,25 +91,23 @@ let g:floaterm_autoclose=1
 filetype plugin on
 
 let mapleader = " "     "set leader as space key
-"let g:NERDCommenterInvert = '<leader>/'
 let g:NERDCommentEmptyLines = 1     "allow commenting of empty lines
 "let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }   "custom for C
 nnoremap <leader>/ :NERDCommenterInvert<CR>
 "------------------------------------------------------------------------------
 "File operations
 
-
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>P  :Rg <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>e :CocCommand explorer <CR>
-"nnoremap <C-/>  :NERDCommenterToggle
 
-"nmap <leader>f :Vex<CR>  "openup file viewer
+"ranger options
+let g:rnvimr_ex_enable = 1
+nmap <leader>r :RnvimrToggle<CR>
+
 nmap <leader>q  :q<CR>  ":q command with space+q combination
-nmap <leader>w  :w<CR>  ":w command with space+w combination
+nmap zz :w<CR>  ":w command with space+w combination
 "------------------------------------------------------------------------------
 "splitting and navigating windows
 
@@ -127,4 +125,3 @@ noremap <Leader>l :wincmd l<CR>
 noremap <Leader>h :wincmd h<CR>
 noremap <Leader>j :wincmd j<CR>
 noremap <Leader>k :wincmd k<CR>
-"------------------------------------------------------------------------------
